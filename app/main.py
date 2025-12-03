@@ -23,10 +23,10 @@ async def get_agents():
     """Get all agents"""
     return AgentFactory.list()
 
-@app.get("/agents/{agent_name}/prompt")
+@app.get("/agents/{agent_name}")
 async def get_agent(agent_name: str):
     """Get agent by id"""
-    return AgentFactory.checkout(agent_name).system_prompt
+    return AgentFactory.detail(agent_name)
 
 @app.get("/llms")
 async def get_llms():

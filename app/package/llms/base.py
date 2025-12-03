@@ -3,6 +3,7 @@ from uuid import uuid4
 from enum import StrEnum
 from abc import ABC, abstractmethod
 from typing import Optional
+from typing import Any
 
 class Role(StrEnum):
     USER = "user"
@@ -16,7 +17,7 @@ class ModelRequest(BaseModel):
 class ModelResponse(BaseModel):
     model_id: str
     role: Role
-    content: str
+    content: Any
     reason: Optional[str] = Field(default=None)
     input_tokens: Optional[int] = Field(default=0)
     output_tokens: Optional[int] = Field(default=0)

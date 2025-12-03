@@ -23,6 +23,19 @@ class AgentFactory:
     def list():
         return list(AgentFactory._agents.keys())
 
+    @staticmethod
+    def detail(agent_name:str):
+        if agent_name not in AgentFactory._agents:
+            raise ValueError(f"Agent {agent_name} not found")
+        system_prompt, DataModel, format = AgentFactory._agents[agent_name]
+        return {
+            "agent_name": agent_name,
+            "system_prompt": system_prompt(),
+            "DataModel": DataModel.model_json_schema() if DataModel else None,
+            # "format": format
+        }
+        ...
+
 """
 Example:
 AgentFactory.register("customer-info-extractor", PromptObj, CustomerInfo, "json")

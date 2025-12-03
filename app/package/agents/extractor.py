@@ -1,16 +1,16 @@
-from typing import Dict, Any, List, Type, Literal
+from typing import Dict, Any, List, Type, Literal, Optional
 from toon import decode
 import json
 from pydantic import BaseModel
 import logging
-from agents.llms.utils import token_calculation, token_price_list, parse_blockcode
+from package.llms.utils import token_calculation, token_price_list, parse_blockcode
 
 class Extractor:
-    def __init__(self, agent_name:str, llm:Any, system_prompt, DataModel:Type[BaseModel], format:Literal["json", "toon"]="toon", max_retries:int=2):
+    def __init__(self, agent_name:str, system_prompt, DataModel:Optional[Type[BaseModel]]=None, format:Literal["json", "toon", None]=None, max_retries:int=2):
         self.agent_name = agent_name
-        self.llm = llm
         self.system_prompt = system_prompt
         self.DataModel = DataModel
+        self.llm:Any = None
         self.format = format
         self.max_retries = max_retries
         self.logger = logging.getLogger(agent_name)
@@ -48,6 +48,8 @@ class Extractor:
         self.logger.debug(f"LLM raw output: {output}")
         self.input_tokens += response.input_tokens
         self.output_tokens += response.output_tokens
+        if self.DataModel is None:
+            return output
         output = parse_blockcode(output, self.format)
         self.logger.debug(f"Parsed output: {output}")
         if self.format == "json":

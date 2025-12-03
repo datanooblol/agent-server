@@ -1,6 +1,0 @@
-MODELS = {
-    "us.amazon.nova-micro-v1:0": {
-        "input_cost": 0.0000011550,
-        "output_cost": 0.000004620
-    }
-}

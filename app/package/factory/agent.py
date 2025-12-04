@@ -32,9 +32,7 @@ class AgentFactory:
             "agent_name": agent_name,
             "system_prompt": system_prompt(),
             "DataModel": DataModel.model_json_schema() if DataModel else None,
-            # "format": format
         }
-        ...
 
 """
 Example:

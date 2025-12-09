@@ -1,3 +1,4 @@
+# This extractor is on hold, using Agent instead
 from typing import Dict, Any, List, Type, Literal, Optional
 from toon import decode
 import json

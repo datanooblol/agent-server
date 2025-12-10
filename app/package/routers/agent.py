@@ -8,7 +8,7 @@ router = APIRouter(prefix="/agent", tags=["Agent"])
 class AgentRequest(BaseModel):
     """Request model for agent"""
     model_id: str
-    user_input: str
+    content: str
 
 @router.get("/")
 async def list_available_agents():
@@ -28,4 +28,4 @@ async def call_agent(
     """Run agent by id"""
     model = AgentFactory.checkout(agent_name)
     model.model = LLMFactory.checkout(agent_request.model_id)
-    return model.run(agent_request.user_input)
+    return model.run(agent_request.content)

@@ -8,7 +8,7 @@ router = APIRouter(prefix="/intent", tags=["Intent"])
 class IntentRequest(BaseModel):
     """Request model for intent classifier"""
     model_id: str
-    user_input: str
+    content: str
 
 @router.get("/")
 async def list_available_intent_classifiers():
@@ -28,4 +28,4 @@ async def call_agent(
     """Run agent by id"""
     model = IntentFactory.checkout(intent_name)
     model.model = LLMFactory.checkout(intent_request.model_id)
-    return model.run(intent_request.user_input)
+    return model.run(intent_request.content)

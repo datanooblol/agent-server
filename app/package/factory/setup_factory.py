@@ -5,7 +5,7 @@ from package.llms.bedrock import BedrockNova
 from package.prompt_hub import PromptHub
 from package.intent_hub import IntentHub
 from package.data_models.intent_classification import Intent
-from package.intents.base import IntentClassifier
+from package.embedding.transformer_embedding import TransformerEmbedding
 
 def setup_agents():
     AgentFactory.register("bro-andy", "funny and supportive Andy bro", PromptHub.bro_andy, None, None)
@@ -17,7 +17,8 @@ def setup_agents():
 
 def setup_llms():
     LLMFactory.register("nova-micro", BedrockNova, "us.amazon.nova-micro-v1:0")
-    LLMFactory.register("embedding", IntentClassifier, "embedding")
+    LLMFactory.register("paraphase-embedding", TransformerEmbedding, "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
+    ##
 
 def setup_intent_classifiers():
     IntentFactory.register("query", "classify query intent: True|False", IntentHub.query)

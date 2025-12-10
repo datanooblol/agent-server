@@ -1,7 +1,7 @@
 from toon import decode
 import json
 import logging
-from package.llms.utils import token_calculation, token_price_list, parse_blockcode
+from package.llms.utils import parse_blockcode
 
 class Agent:
     def __init__(self, agent_name, system_prompt, DataModel=None, format=None, max_retries=2):
@@ -9,7 +9,7 @@ class Agent:
         self.system_prompt = system_prompt
         self.DataModel = DataModel
         self.format = format
-        self.llm = None
+        self.model = None
         self.max_retries = max_retries
         self.logger = logging.getLogger(self.agent_name)
 
@@ -31,7 +31,7 @@ class Agent:
         response= None
         try:
             original_messages = [dict(role="user", content=content)]
-            response = self.llm.run(self.system_prompt, original_messages)
+            response = self.model.run(self.system_prompt, original_messages)
             if self.format in ["python", "sql"]:
                 response.content = parse_blockcode(response.content, language=self.format)
                 self.logger.debug(f"{self.format.upper()} code:\n{response.content}")

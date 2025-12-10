@@ -18,3 +18,11 @@ class PromptHub:
     @staticmethod
     def generate_plotly():
         return (PromptHub.base_dir / "generate_plotly.md").read_text(encoding='utf-8')
+
+    @staticmethod
+    def chat_with_data():
+        return (PromptHub.base_dir / "chat_with_data.md").read_text(encoding='utf-8')
+
+    @staticmethod
+    def chat():
+        return (PromptHub.base_dir / "chat.md").read_text(encoding='utf-8')

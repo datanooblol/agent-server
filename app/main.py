@@ -4,13 +4,14 @@ setup_logger(logging.DEBUG)
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from package.factory.setup_factory import setup_agents, setup_llms
-from package.factory.agent import AgentFactory
-from package.factory.llm import LLMFactory
-from pydantic import BaseModel
+from package.factory.setup_factory import setup_agents, setup_llms, setup_intent_classifiers
+from package.routers.agent import router as agent_router
+from package.routers.intent import router as intent_router
+from package.routers.llm import router as llm_router
 
 setup_llms()
 setup_agents()
+setup_intent_classifiers()
 
 app = FastAPI(title="Agent Service")
 
@@ -23,35 +24,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-class AgentRequest(BaseModel):
-    """Request model for agent"""
-    model_id: str
-    user_input: str
-
-@app.get("/llms")
-async def list_available_llms():
-    """Get all llms"""
-    return LLMFactory.list()
-
-@app.get("/agents")
-async def list_available_agents():
-    """Get all agents"""
-    return AgentFactory.list()
-
-@app.get("/agents/{agent_name}")
-async def get_agent_detail(agent_name: str):
-    """Get agent by id"""
-    return AgentFactory.detail(agent_name)
-
-@app.post("/agents/{agent_name}")
-async def call_agent(
-    agent_name: str, 
-    agent_request: AgentRequest
-):
-    """Run agent by id"""
-    agent = AgentFactory.checkout(agent_name)
-    agent.llm = LLMFactory.checkout(agent_request.model_id)
-    return agent.run(agent_request.user_input)
+for r in [
+    llm_router,
+    agent_router,
+    intent_router,
+]:
+    app.include_router(r)
 
 @app.get("/health")
 async def health_check():

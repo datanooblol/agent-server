@@ -1,0 +1,53 @@
+{
+    "data": [
+      {
+        "x": [
+          "Minimum Tip",
+          "Average Tip",
+          "Maximum Tip"
+        ],
+        "y": [
+          1,
+          2.833448275862069,
+          6.5
+        ],
+        "type": "bar",
+        "name": "Female",
+        "marker": {
+          "color": "#1f77b4"
+        }
+      },
+      {
+        "x": [
+          "Minimum Tip",
+          "Average Tip",
+          "Maximum Tip"
+        ],
+        "y": [
+          1,
+          3.0896178343949052,
+          10
+        ],
+        "type": "bar",
+        "name": "Male",
+        "marker": {
+          "color": "#ff7f0e"
+        }
+      }
+    ],
+    "layout": {
+      "title": "Comparison of Tips Given by Gender",
+      "xaxis": {
+        "title": "Tip Type"
+      },
+      "yaxis": {
+        "title": "Tip Amount ($)"
+      },
+      "barmode": "group",
+      "legend": {
+        "title": "Gender",
+        "x": 0.5,
+        "y": 1.1
+      }
+    }
+  }

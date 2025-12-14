@@ -5,6 +5,7 @@ from package.llms.bedrock import BedrockNova
 from package.prompt_hub import PromptHub
 from package.intent_hub import IntentHub
 from package.data_models.intent_classification import Intent
+from package.data_models.plotly_data_generator import PlotlyData
 from package.embedding.transformer_embedding import TransformerEmbedding
 
 def setup_agents():
@@ -12,6 +13,7 @@ def setup_agents():
     AgentFactory.register("intent-classifier", "classify user's sentiment", PromptHub.intent_classifier, Intent, "toon")
     AgentFactory.register("sql-generator", "generate sql based on metadata", PromptHub.generate_sql, None, "sql")
     AgentFactory.register("plotly-generator", "generate plotly graph based on data", PromptHub.generate_plotly, None, "python")
+    AgentFactory.register("plotly-data-generator", "generate plotly data for web", PromptHub.generate_plotly_data, PlotlyData, "json")
     AgentFactory.register("chat-with-data", "answer based on data", PromptHub.chat_with_data, None, None)
     AgentFactory.register("chat", "normal chat", PromptHub.chat, None, None)
 

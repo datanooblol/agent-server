@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Plotly Test</title>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+</head>
+<body>
+    <div id="chart" style="width:100%;height:500px;"></div>
+    
+    <script>
+        fetch('plotly_data.json')
+            .then(response => response.json())
+            .then(plotlyData => {
+                Plotly.newPlot('chart', plotlyData.data, plotlyData.layout);
+            })
+            .catch(error => console.error('Error loading chart data:', error));
+    </script>
+</body>
+</html>

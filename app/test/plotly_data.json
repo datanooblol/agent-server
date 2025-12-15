@@ -2,52 +2,35 @@
     "data": [
       {
         "x": [
-          "Minimum Tip",
-          "Average Tip",
-          "Maximum Tip"
+          "2025-04",
+          "2025-03",
+          "2025-02",
+          "2025-01",
+          "2024-12"
         ],
         "y": [
-          1,
-          2.833448275862069,
-          6.5
+          2310475.9,
+          2637968.42,
+          2667874.63,
+          3100207.02,
+          3045560.32
         ],
-        "type": "bar",
-        "name": "Female",
+        "type": "scatter",
+        "mode": "lines+markers",
+        "name": "Total Close",
         "marker": {
           "color": "#1f77b4"
-        }
-      },
-      {
-        "x": [
-          "Minimum Tip",
-          "Average Tip",
-          "Maximum Tip"
-        ],
-        "y": [
-          1,
-          3.0896178343949052,
-          10
-        ],
-        "type": "bar",
-        "name": "Male",
-        "marker": {
-          "color": "#ff7f0e"
         }
       }
     ],
     "layout": {
-      "title": "Comparison of Tips Given by Gender",
+      "title": "Total Close Trend Over the Last Five Months",
       "xaxis": {
-        "title": "Tip Type"
+        "title": "Month",
+        "tickformat": "%Y-%m"
       },
       "yaxis": {
-        "title": "Tip Amount ($)"
-      },
-      "barmode": "group",
-      "legend": {
-        "title": "Gender",
-        "x": 0.5,
-        "y": 1.1
+        "title": "Total Close (USD)"
       }
     }
   }
